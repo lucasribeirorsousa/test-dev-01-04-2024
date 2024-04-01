@@ -1,0 +1,41 @@
+<!-- create_consumer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Consumidor</title>
+</head>
+<body>
+    <h1>Cadastro de Consumidor</h1>
+    <form action="{% url 'create_consumer' %}" method="post">
+        {% csrf_token %}
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+        <br>
+        <label for="document">Documento:</label>
+        <input type="text" id="document" name="document" required>
+        <br>
+        <label for="zip_code">CEP:</label>
+        <input type="text" id="zip_code" name="zip_code" required>
+        <br>
+        <label for="city">Cidade:</label>
+        <input type="text" id="city" name="city" required>
+        <br>
+        <label for="state">Estado:</label>
+        <input type="text" id="state" name="state" required>
+        <br>
+        <label for="consumption">Consumo (kWh):</label>
+        <input type="number" id="consumption" name="consumption" required>
+        <br>
+        <label for="consumer_type">Tipo de Consumidor:</label>
+        <select id="consumer_type" name="consumer_type" required>
+            <option value="Residencial">Residencial</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Industrial">Industrial</option>
+        </select>
+        <br>
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+</html>

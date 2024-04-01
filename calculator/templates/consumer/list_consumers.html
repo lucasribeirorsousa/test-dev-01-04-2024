@@ -1,0 +1,55 @@
+<!-- list_consumers.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Consumidores</title>
+</head>
+<body>
+    <h1>Listagem de Consumidores</h1>
+    <a href="{% url 'create_consumer' %}">Adicionar Consumidor</a>
+    <br>
+    <hr>
+    <form action="{% url 'list_consumers' %}" method="get">
+        <label for="consumer_type">Tipo de Consumidor:</label>
+        <select id="consumer_type" name="consumer_type">
+            <option value="">Todos</option>
+            <option value="Residencial">Residencial</option>
+            <option value="Comercial">Comercial</option>
+            <option value="Industrial">Industrial</option>
+        </select>
+        <br>
+        <label for="consumption_range">Intervalo de Consumo (kWh):</label>
+        <input type="text" id="consumption_range" name="consumption_range">
+        <br>
+        <button type="submit">Filtrar</button>
+    </form>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Documento</th>
+                <th>Cidade</th>
+                <th>Estado</th>
+                <th>Consumo (kWh)</th>
+                <th>Tipo</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+            <tr>
+                <td>{{ item.consumer.name }}</td>
+                <td>{{ item.consumer.document }}</td>
+                <td>{{ item.consumer.city }}</td>
+                <td>{{ item.consumer.state }}</td>
+                <td>{{ item.consumer.consumption }}</td>
+                <td>{{ item.consumer.discount_rule.consumer_type }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

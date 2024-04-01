@@ -2,18 +2,44 @@ def calculator(consumption: list, distributor_tax: float, tax_type: str) -> tupl
     """
     returns a tuple of floats contained anual savings, monthly savings, applied_discount and coverage
     """
-    annual_savings = 0
-    monthly_savings = 0
-    applied_discount = 0
-    coverage = 0
+    # Obter o consumo médio
+    average_consumption = sum(consumption) / len(consumption)
 
-    # your code here #
+    # Determinar o desconto com base no tipo de tarifa e no consumo médio
+    if average_consumption < 10000:
+        if tax_type == "Residencial":
+            applied_discount = 0.18
+        elif tax_type == "Comercial":
+            applied_discount = 0.16
+        elif tax_type == "Industrial":
+            applied_discount = 0.12
+        coverage = 0.9
+    elif 10000 <= average_consumption <= 20000:
+        if tax_type == "Residencial":
+            applied_discount = 0.22
+        elif tax_type == "Comercial":
+            applied_discount = 0.18
+        elif tax_type == "Industrial":
+            applied_discount = 0.15
+        coverage = 0.95
+    else:
+        if tax_type == "Residencial":
+            applied_discount = 0.25
+        elif tax_type == "Comercial":
+            applied_discount = 0.22
+        elif tax_type == "Industrial":
+            applied_discount = 0.18
+        coverage = 0.99
+
+    # Calcular economia anual e mensal
+    annual_savings = sum(consumption) * distributor_tax * applied_discount * 12
+    monthly_savings = annual_savings / 12
 
     return (
         round(annual_savings, 2),
         round(monthly_savings, 2),
-        applied_discount,
-        coverage,
+        applied_discount * 100,
+        coverage * 100,
     )
 
 
